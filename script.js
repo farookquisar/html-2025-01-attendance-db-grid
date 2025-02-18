@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>
     initializeWeekCards();
     // Initialize year and month selection
     initializeYearMonthSelection();
+    updateStatVisibility();
 });
 
 function initializeWeekCards()
@@ -80,16 +81,9 @@ function initializeYearMonthSelection()
     {
         card.addEventListener('click', () =>
         {
-            // Remove active class from all year cards
             yearCards.forEach(c => c.classList.remove('active'));
-
-            // Add active class to clicked card
             card.classList.add('active');
-
-            // Show year summary
             yearSummary.classList.add('active');
-
-            // Update summary stats based on selected year
             updateYearSummary(card.dataset.year);
         });
     });
@@ -97,28 +91,84 @@ function initializeYearMonthSelection()
     // Month selection
     const monthCards = document.querySelectorAll('.month-card');
     const monthSummary = document.querySelector('.month-summary');
-    const selectedMonthSpan = document.querySelector('.selected-month');
 
-    monthCards.forEach(card =>
-    {
-        card.addEventListener('click', () =>
-        {
-            monthCards.forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
+    // Initialize each month with random stats
+    monthCards.forEach(card => {
+        // Example data - some months with all zeros, some with counts
+        const monthData = {
+            1: { absent: 2, punchMissing: 3, late: 5 },     // January - with counts
+            2: { absent: 0, punchMissing: 0, late: 0 },     // February - all zeros
+            3: { absent: 1, punchMissing: 0, late: 2 },     // March - mixed
+            4: { absent: 0, punchMissing: 0, late: 0 },     // April - all zeros
+            5: { absent: 3, punchMissing: 1, late: 0 },     // May - mixed
+            // ... rest can be random
+        };
 
-            // Update stats for this month
-            const stats = {
+        const monthNumber = parseInt(card.dataset.month);
+        let stats;
+        
+        if (monthData[monthNumber]) {
+            stats = monthData[monthNumber];
+        } else {
+            // Random stats for other months
+            stats = {
                 absent: Math.floor(Math.random() * 5),
                 punchMissing: Math.floor(Math.random() * 7),
                 late: Math.floor(Math.random() * 10)
             };
-            updateMonthCard(card, stats);
+        }
+        
+        updateMonthCard(card, stats);
+
+        card.addEventListener('click', () =>
+        {
+            monthCards.forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
         });
     });
 
+    // Initialize each week with random stats
+    const weekCards = document.querySelectorAll('.week-card');
+    weekCards.forEach(card => {
+        // Example data - some weeks with all zeros, some with counts
+        const weekData = {
+            1: { absent: 1, punchMissing: 2, late: 3 },     // Week 1 - with counts
+            2: { absent: 0, punchMissing: 0, late: 0 },     // Week 2 - all zeros
+            3: { absent: 0, punchMissing: 1, late: 0 },     // Week 3 - mixed
+        };
+
+        const weekNumber = parseInt(card.dataset.week);
+        const stats = weekData[weekNumber];
+        
+        // Update the week's inline summary with initial stats
+        Object.entries(stats).forEach(([key, value]) => {
+            const statElement = card.querySelector(`.inline-summary [data-type="${key}"] .stat-value`);
+            if (statElement) {
+                statElement.textContent = value.toString();
+                const statItem = statElement.closest('.stat-item');
+                if (value === 0) {
+                    statItem.classList.add('hidden');
+                } else {
+                    statItem.classList.remove('hidden');
+                }
+            }
+        });
+
+        // Handle the tick mark
+        const allGoodMark = card.querySelector('.inline-summary .all-good');
+        const allZero = Object.values(stats).every(value => value === 0);
+        if (allGoodMark) {
+            if (allZero) {
+                allGoodMark.classList.remove('hidden');
+            } else {
+                allGoodMark.classList.add('hidden');
+            }
+        }
+    });
+
     // Set initial active states
-    yearCards[0].click(); // Activate first year by default
-    monthCards[0].click(); // Activate first month by default
+    yearCards[0].click();
+    monthCards[0].click();
 }
 
 function populateDays(weekCard)
@@ -193,33 +243,70 @@ function updateYearSummary(year)
 
 function updateMonthCard(card, stats)
 {
+    const allGoodMark = card.querySelector('.inline-summary .all-good');
+    let allZero = true;
+    
     Object.entries(stats).forEach(([key, value]) =>
     {
-        const statElement = card.querySelector(`.inline-summary [data-type="${ key }"] .stat-value`);
-        if (statElement)
-        {
+        const statElement = card.querySelector(`.inline-summary [data-type="${key}"] .stat-value`);
+        if (statElement) {
             statElement.textContent = value.toString();
+            // Update visibility of the parent stat-item
+            const statItem = statElement.closest('.stat-item');
+            if (value === 0) {
+                statItem.classList.add('hidden');
+            } else {
+                statItem.classList.remove('hidden');
+                allZero = false;
+            }
         }
     });
+
+    // Show/hide tick mark based on all values being zero
+    if (allGoodMark) {
+        if (allZero) {
+            allGoodMark.classList.remove('hidden');
+        } else {
+            allGoodMark.classList.add('hidden');
+        }
+    }
 }
 
 function updateWeekCard(card)
 {
     const stats = {
-        absent: Math.floor(Math.random() * 3),      // Random demo data
+        absent: Math.floor(Math.random() * 3),
         punchMissing: Math.floor(Math.random() * 4),
         late: Math.floor(Math.random() * 5)
     };
 
-    // Update the stats in the summary
+    const allGoodMark = card.querySelector('.inline-summary .all-good');
+    let allZero = true;
+
     Object.entries(stats).forEach(([key, value]) =>
     {
-        const statElement = card.querySelector(`.inline-summary [data-type="${ key }"] .stat-value`);
-        if (statElement)
-        {
+        const statElement = card.querySelector(`.inline-summary [data-type="${key}"] .stat-value`);
+        if (statElement) {
             statElement.textContent = value.toString();
+            // Update visibility of the parent stat-item
+            const statItem = statElement.closest('.stat-item');
+            if (value === 0) {
+                statItem.classList.add('hidden');
+            } else {
+                statItem.classList.remove('hidden');
+                allZero = false;
+            }
         }
     });
+
+    // Show/hide tick mark based on all values being zero
+    if (allGoodMark) {
+        if (allZero) {
+            allGoodMark.classList.remove('hidden');
+        } else {
+            allGoodMark.classList.add('hidden');
+        }
+    }
 }
 
 // Add event listeners to week headers for accordion functionality
@@ -277,5 +364,23 @@ function populateDays(weekContent)
             </div>
         `;
         weekContent.appendChild(dayElement);
+    });
+}
+
+// Add this function to handle stat visibility
+function updateStatVisibility() {
+    // Get all stat items
+    const statItems = document.querySelectorAll('.stat-item');
+    
+    statItems.forEach(item => {
+        const valueElement = item.querySelector('.stat-value');
+        const value = parseInt(valueElement.textContent);
+        
+        // Hide if value is 0, show if greater than 0
+        if (value === 0) {
+            item.classList.add('hidden');
+        } else {
+            item.classList.remove('hidden');
+        }
     });
 } 

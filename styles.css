@@ -504,3 +504,16 @@ body {
 .week-header:hover {
 	background-color: #f5f5f5;
 }
+
+.stat-item.hidden {
+	display: none;
+}
+
+.all-good {
+	color: #4CAF50;
+	font-weight: bold;
+}
+
+.all-good.hidden {
+	display: none;
+}
