@@ -19,11 +19,33 @@ function initializeWeekCards()
         expandIcon.addEventListener('click', (e) =>
         {
             e.stopPropagation(); // Prevent header click event
-            card.classList.toggle('expanded');
-            if (card.classList.contains('expanded') &&
-                card.querySelector('.week-content').children.length === 0)
+
+            // If the card is already expanded, close it
+            if (card.classList.contains('expanded'))
             {
-                populateDays(card);
+                card.classList.remove('expanded');
+                expandIcon.style.transform = 'rotate(0deg)';
+            } else
+            {
+                // Close any other expanded cards
+                weekCards.forEach(otherCard =>
+                {
+                    if (otherCard !== card && otherCard.classList.contains('expanded'))
+                    {
+                        otherCard.classList.remove('expanded');
+                        otherCard.querySelector('.expand-icon').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Expand this card
+                card.classList.add('expanded');
+                expandIcon.style.transform = 'rotate(90deg)';
+
+                // Populate days if needed
+                if (card.querySelector('.week-content').children.length === 0)
+                {
+                    populateDays(card);
+                }
             }
         });
 
@@ -197,5 +219,63 @@ function updateWeekCard(card)
         {
             statElement.textContent = value.toString();
         }
+    });
+}
+
+// Add event listeners to week headers for accordion functionality
+document.querySelectorAll('.week-header').forEach(header =>
+{
+    header.addEventListener('click', () =>
+    {
+        const weekCard = header.closest('.week-card');
+        const content = weekCard.querySelector('.week-content');
+        const expandIcon = header.querySelector('.expand-icon');
+
+        // Toggle the active class
+        weekCard.classList.toggle('active');
+
+        // Rotate the expand icon
+        if (weekCard.classList.contains('active'))
+        {
+            expandIcon.style.transform = 'rotate(90deg)';
+            // Populate days if not already populated
+            if (content.children.length === 0)
+            {
+                populateDays(content);
+            }
+        } else
+        {
+            expandIcon.style.transform = 'rotate(0deg)';
+        }
+    });
+});
+
+// Function to populate days in a week
+function populateDays(weekContent)
+{
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+
+    daysOfWeek.forEach(day =>
+    {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day-row';
+        dayElement.innerHTML = `
+            <div class="day-name">${ day }</div>
+            <div class="day-status">
+                <div class="stat-item" data-type="absent">
+                    <span class="stat-label">A:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item" data-type="punch-missing">
+                    <span class="stat-label">PM:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item" data-type="late">
+                    <span class="stat-label">L:</span>
+                    <span class="stat-value">0</span>
+                </div>
+            </div>
+        `;
+        weekContent.appendChild(dayElement);
     });
 } 
