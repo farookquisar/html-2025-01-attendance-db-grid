@@ -1,0 +1,445 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Roboto", sans-serif;
+	background-color: #F5F4F2;
+	color: #333333;
+	padding: 20px;
+}
+
+.calendar-container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section-container {
+	background: white;
+	border-radius: 6px;
+	padding: 24px;
+	margin-bottom: 24px;
+	box-shadow: 0px 4px 8px 0px #00000029;
+}
+
+.card {
+	background: white;
+	border-radius: 4px;
+	padding: 16px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	position: relative;
+}
+
+.card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	transform: translateY(-2px);
+}
+
+/* Years Row */
+.years-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+	margin-bottom: 0;
+}
+
+.year-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.year-number {
+	font-size: 24px;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+/* Months Row */
+.months-row {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 16px;
+	margin-bottom: 0;
+}
+
+.month-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 12px;
+}
+
+.month-name {
+	font-size: 16px;
+	margin-bottom: 4px;
+}
+
+/* Weeks Row */
+.weeks-row {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 100%;
+}
+
+.week-card {
+	width: 100%;
+	background: #f8f8f8;
+	overflow: hidden;
+}
+
+.week-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 12px;
+}
+
+.expand-icon {
+	font-size: 24px;
+	transition: transform 0.3s ease;
+	margin-left: auto;
+	padding: 4px 8px;
+}
+
+.week-card.expanded .expand-icon {
+	transform: rotate(90deg);
+}
+
+.week-content {
+	display: none;
+	margin-top: 16px;
+	padding: 16px;
+	background: white;
+	border-top: 1px solid #e0e0e0;
+}
+
+.week-card.expanded .week-content {
+	display: block;
+}
+
+.day-item {
+	padding: 12px 16px;
+	border-bottom: 1px solid #e0e0e0;
+	background: white;
+}
+
+.day-item:last-child {
+	border-bottom: none;
+}
+
+/* Optional: Add some hover effect to the containers */
+.section-container:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Summary Stats Styling */
+.summary-stats {
+	display: none;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 8px;
+	font-size: 14px;
+	transition: all 0.3s ease;
+}
+
+.stat-item {
+	background: #f0f0f0;
+	padding: 4px 8px;
+	border-radius: 4px;
+	display: flex;
+	gap: 4px;
+}
+
+.stat-label {
+	color: #666;
+}
+
+.stat-value {
+	font-weight: 500;
+	color: #333;
+}
+
+/* Update existing card styles */
+.year-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.year-number {
+	font-size: 24px;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.month-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.month-name {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+
+/* Update week header to accommodate summary */
+.week-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 16px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+/* Stat colors for different types */
+.stat-item[data-type="absent"] {
+	background: #ffebee;
+}
+
+.stat-item[data-type="punch-missing"] {
+	background: #fff3e0;
+}
+
+.stat-item[data-type="late"] {
+	background: #e8f5e9;
+}
+
+/* Add these styles */
+.year-card.active,
+.month-card.active {
+	background-color: #f5f5f5;
+	border: 2px solid #1976d2;
+}
+
+.year-card.active .summary-stats,
+.month-card.active .summary-stats {
+	display: flex;
+}
+
+/* Update existing card styles */
+.card {
+	position: relative;
+	/* ... existing styles ... */
+}
+
+/* Optional: Add transition for smooth showing/hiding */
+.summary-stats {
+	transition: all 0.3s ease;
+}
+
+/* Add these new styles */
+.summary-container {
+	margin-top: 16px;
+	padding: 16px;
+	background: #f8f8f8;
+	border-radius: 4px;
+	display: none; /* Hidden by default */
+}
+
+.summary-container.active {
+	display: block;
+}
+
+.year-card.active,
+.month-card.active {
+	background-color: #e3f2fd; /* Light blue background for active cards */
+	border: 2px solid #1976d2;
+}
+
+/* Update summary stats styling */
+.summary-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	font-size: 14px;
+}
+
+.stat-item {
+	background: white;
+	padding: 8px 12px;
+	border-radius: 4px;
+	display: flex;
+	gap: 8px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove the old summary styles from cards */
+.card .summary-stats {
+	display: none;
+}
+
+/* Add these styles */
+.summary-title {
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 12px;
+	color: #1976d2;
+}
+
+.selected-month {
+	font-weight: 600;
+}
+
+/* Update existing summary container styles */
+.summary-container {
+	margin-top: 16px;
+	padding: 16px;
+	background: #f8f8f8;
+	border-radius: 4px;
+	display: none;
+}
+
+.summary-container.active {
+	display: block;
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Update month card active state */
+.month-card.active {
+	background-color: #e3f2fd;
+	border: 2px solid #1976d2;
+	transform: translateY(-2px);
+}
+
+/* Update week card styles */
+.week-card.active {
+	background-color: #e3f2fd;
+	border: 2px solid #1976d2;
+}
+
+.week-card.active .week-header {
+	color: #1976d2;
+}
+
+/* Week summary specific styles */
+.week-summary {
+	margin-top: 16px;
+}
+
+.week-summary .summary-stats {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+/* Update expand icon behavior */
+.expand-icon {
+	cursor: pointer;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+.expand-icon:hover {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Ensure proper spacing in week header */
+.week-header {
+	padding: 8px;
+	border-radius: 4px;
+}
+
+.week-header span:first-child {
+	font-weight: 500;
+}
+
+/* Add these new styles for inline summaries */
+.inline-summary {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+	font-size: 12px;
+}
+
+.inline-summary .stat-item {
+	padding: 2px 6px;
+	background: none;
+	border-radius: 4px;
+	display: flex;
+	gap: 4px;
+	font-size: 11px;
+}
+
+.inline-summary .stat-item[data-type="absent"] {
+	background: #ffebee;
+}
+
+.inline-summary .stat-item[data-type="punch-missing"] {
+	background: #fff3e0;
+}
+
+.inline-summary .stat-item[data-type="late"] {
+	background: #e8f5e9;
+}
+
+.month-card .inline-summary,
+.week-info .inline-summary {
+	opacity: 0.8;
+}
+
+.month-card.active .inline-summary,
+.week-card.active .inline-summary {
+	opacity: 1;
+}
+
+/* Update week header styles */
+.week-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 12px;
+}
+
+.week-info {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.week-info span {
+	font-weight: 500;
+}
+
+/* Update stat items for inline display */
+.inline-summary .stat-item {
+	padding: 2px 6px;
+	border-radius: 4px;
+	display: flex;
+	gap: 4px;
+	font-size: 11px;
+	background: none;
+}
+
+.inline-summary .stat-label {
+	color: #666;
+}
+
+.inline-summary .stat-value {
+	font-weight: 500;
+	color: #333;
+}
+
+/* Remove the separate summary containers for months and weeks */
+.month-summary,
+.week-summary {
+	display: none;
+}

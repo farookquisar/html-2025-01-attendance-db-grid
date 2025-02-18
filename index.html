@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Calendar View</title>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="calendar-container">
+			<!-- Years Section -->
+			<div class="section-container">
+				<div class="years-row">
+					<div class="card year-card" data-year="2024">
+						<div class="year-number">2024</div>
+					</div>
+					<div class="card year-card" data-year="2023">
+						<div class="year-number">2023</div>
+					</div>
+					<div class="card year-card" data-year="2022">
+						<div class="year-number">2022</div>
+					</div>
+				</div>
+				<!-- Year Summary Container -->
+				<div class="summary-container year-summary">
+					<div class="summary-stats">
+						<div class="stat-item" data-type="absent">
+							<span class="stat-label">Absent:</span>
+							<span class="stat-value">24</span>
+						</div>
+						<div class="stat-item" data-type="punch-missing">
+							<span class="stat-label">Punch Missing:</span>
+							<span class="stat-value">36</span>
+						</div>
+						<div class="stat-item" data-type="late">
+							<span class="stat-label">Late:</span>
+							<span class="stat-value">60</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Months Section -->
+			<div class="section-container">
+				<div class="months-row">
+					<div class="card month-card" data-month="1">
+						<div class="month-name">January</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">2</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">3</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">5</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="2">
+						<div class="month-name">February</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="3">
+						<div class="month-name">March</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="4">
+						<div class="month-name">April</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="5">
+						<div class="month-name">May</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="6">
+						<div class="month-name">June</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="7">
+						<div class="month-name">July</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="8">
+						<div class="month-name">August</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="9">
+						<div class="month-name">September</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="10">
+						<div class="month-name">October</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="11">
+						<div class="month-name">November</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+					<div class="card month-card" data-month="12">
+						<div class="month-name">December</div>
+						<div class="inline-summary">
+							<div class="stat-item" data-type="absent">
+								<span class="stat-label">A:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="punch-missing">
+								<span class="stat-label">PM:</span>
+								<span class="stat-value">0</span>
+							</div>
+							<div class="stat-item" data-type="late">
+								<span class="stat-label">L:</span>
+								<span class="stat-value">0</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Month Summary Container -->
+				<div class="summary-container month-summary">
+					<div class="summary-title">
+						Summary for <span class="selected-month">January</span>
+					</div>
+					<div class="summary-stats">
+						<div class="stat-item" data-type="absent">
+							<span class="stat-label">Absent:</span>
+							<span class="stat-value">2</span>
+						</div>
+						<div class="stat-item" data-type="punch-missing">
+							<span class="stat-label">Punch Missing:</span>
+							<span class="stat-value">3</span>
+						</div>
+						<div class="stat-item" data-type="late">
+							<span class="stat-label">Late:</span>
+							<span class="stat-value">5</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Weeks Section -->
+			<div class="section-container">
+				<div class="weeks-row">
+					<div class="card week-card" data-week="1">
+						<div class="week-header">
+							<div class="week-info">
+								<span>Week 1</span>
+								<div class="inline-summary">
+									<div class="stat-item" data-type="absent">
+										<span class="stat-label">A:</span>
+										<span class="stat-value">1</span>
+									</div>
+									<div class="stat-item" data-type="punch-missing">
+										<span class="stat-label">PM:</span>
+										<span class="stat-value">2</span>
+									</div>
+									<div class="stat-item" data-type="late">
+										<span class="stat-label">L:</span>
+										<span class="stat-value">3</span>
+									</div>
+								</div>
+							</div>
+							<span class="expand-icon">›</span>
+						</div>
+						<div class="week-content">
+							<!-- Days will be populated by JavaScript -->
+						</div>
+					</div>
+					<div class="card week-card" data-week="2">
+						<div class="week-header">
+							<div class="week-info">
+								<span>Week 2</span>
+								<div class="inline-summary">
+									<div class="stat-item" data-type="absent">
+										<span class="stat-label">A:</span>
+										<span class="stat-value">0</span>
+									</div>
+									<div class="stat-item" data-type="punch-missing">
+										<span class="stat-label">PM:</span>
+										<span class="stat-value">0</span>
+									</div>
+									<div class="stat-item" data-type="late">
+										<span class="stat-label">L:</span>
+										<span class="stat-value">0</span>
+									</div>
+								</div>
+							</div>
+							<span class="expand-icon">›</span>
+						</div>
+						<div class="week-content">
+							<!-- Days will be populated by JavaScript -->
+						</div>
+					</div>
+					<div class="card week-card" data-week="3">
+						<div class="week-header">
+							<div class="week-info">
+								<span>Week 3</span>
+								<div class="inline-summary">
+									<div class="stat-item" data-type="absent">
+										<span class="stat-label">A:</span>
+										<span class="stat-value">0</span>
+									</div>
+									<div class="stat-item" data-type="punch-missing">
+										<span class="stat-label">PM:</span>
+										<span class="stat-value">0</span>
+									</div>
+									<div class="stat-item" data-type="late">
+										<span class="stat-label">L:</span>
+										<span class="stat-value">0</span>
+									</div>
+								</div>
+							</div>
+							<span class="expand-icon">›</span>
+						</div>
+						<div class="week-content">
+							<!-- Days will be populated by JavaScript -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>
